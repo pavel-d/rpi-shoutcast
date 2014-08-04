@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to RaspCast
+  ul
+  - each genre in genres
+    li
+      a(href='/#{genre}')= genre
