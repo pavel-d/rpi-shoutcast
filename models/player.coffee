@@ -14,7 +14,12 @@ class Player extends events.EventEmitter
       @process.kill('SIGTERM')
     @emit 'stop'
 
-  playStream: (streamURL) ->
+  open: (streamURL) ->
     exec "echo 'loadfile #{streamURL}' > mp_pipe"
+
+  pause: ->
+    exec 'echo pause > mp_pipe'
+
+
 
 module.exports = Player

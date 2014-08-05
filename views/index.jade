@@ -4,6 +4,21 @@ block content
   h1= title
   p Welcome to RaspCast
   ul
-  - each genre in genres
-    li
-      a(href='/#{genre}')= genre
+  script.
+    app.value('Genres', !{ JSON.stringify(genres) })
+
+  .row(ng-controller="StationsController")
+    .col-md-2
+      table.table.table-hover
+        thead
+          th Genres
+        tbody
+          tr(ng-repeat="genre in genres")
+            td(ng-click="getStations(genre)") {{ genre }}
+    .col-md-2
+      table.table.table-hover
+        thead
+          th Stations
+        tbody
+          tr(ng-repeat="station in stations")
+            td(ng-click="playStation(station)") {{ station.Name }}

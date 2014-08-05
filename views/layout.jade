@@ -1,7 +1,8 @@
 doctype html
-html
+html(ng-app="player")
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    != js('application')
+    != css('application')
   body
     block content
