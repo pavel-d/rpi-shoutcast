@@ -19,11 +19,11 @@ app.use bodyParser.urlencoded()
 app.use cookieParser()
 app.use connectAssets({ paths: ['assets/js', 'assets/css', 'assets/components'] })
 app.use express.static(path.join(__dirname, 'public'))
-app.use express.static(path.join(__dirname, 'assets'))
+app.use '/assets', express.static(path.join(__dirname, 'assets/components'))
 
 app.use '/', router
 
-#/ catch 404 and forward to error handler
+# catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')
   err.status = 404
@@ -31,7 +31,7 @@ app.use (req, res, next) ->
   return
 
 
-#/ error handlers
+# error handlers
 
 # development error handler
 # will print stacktrace

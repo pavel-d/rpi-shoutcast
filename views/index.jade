@@ -5,11 +5,6 @@ block content
   p Welcome to RaspCast
   script.
     app.value('Genres', !{ JSON.stringify(genres) })
-  .row(ng-controller="PlayerController")
-    .col-md-4
-      div(ng-show="nowPlaying")
-        p Now playing {{ nowPlaying.Name }}
-        p Genre {{ nowPlaying.Genre }}
   .row(ng-controller="StationsController")
     .col-md-4
       table.table.table-hover
@@ -20,10 +15,13 @@ block content
             td(ng-click="getStations(genre)") {{ genre }}
               button.btn.btn-default.btn-xs Show stations
     .col-md-4
-      table.table.table-hover
-        thead
-          th Stations
-        tbody
-          tr(ng-repeat="station in stations")
-            td(ng-click="playStation(station)") {{ station.Name }}
-              button.btn.btn-success.btn-xs Play
+      div(ng-show="loadingStations")
+        img(src="/images/ajax-loader.gif", alt="loading")
+      div(ng-hide="loadingStations")
+        table.table.table-hover
+          thead
+            th Stations
+          tbody
+            tr(ng-repeat="station in stations")
+              td(ng-click="playStation(station)") {{ station.Name }}
+                button.btn.btn-success.btn-xs Play

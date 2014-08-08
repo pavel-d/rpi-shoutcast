@@ -1,3 +1,7 @@
 /*
  *=require ../components/bootstrap/dist/css/bootstrap.min.css
  */
+
+body { padding-top: 70px; }
+
+.navbar-player-buttons { margin-top: 50px; }

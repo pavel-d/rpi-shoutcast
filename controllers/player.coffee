@@ -4,8 +4,8 @@ player = new Player()
 
 module.exports.station = (req, res) ->
   streamID = req.params.stationID
-  shoutcast.getStreams streamID, (err, streams) ->
-    player.open streams[0]
+  shoutcast.getStream streamID, (err, stream) ->
+    player.open stream
     res.send 204
 
 module.exports.stations = (req, res) ->
@@ -13,7 +13,10 @@ module.exports.stations = (req, res) ->
   shoutcast.browseByGenre genreName, (err, stations) ->
     res.json(stations)
 
-
 module.exports.pause = (req, res) ->
   player.pause()
   res.send 204
+
+module.exports.currentTrack = (req, res) ->
+  shoutcast.getCurrentTrack  (err, currentTrack) ->
+    res.json(currentTrack)

@@ -15,9 +15,9 @@ describe 'Shoutcast', ->
       expect(genres).to.be.an 'array'
       done()
 
-  describe '.getStreams(genre)', ->
+  describe '.getStream(genre)', ->
     it 'should return array of stream urls', (done) ->
       stationID = '171444'
-      shoutcast.getStreams stationID, (err, streams) ->
-        expect(streams).to.an 'array'
+      shoutcast.getStream stationID, (err, streams) ->
+        expect(streams).to.a 'string'
         done()
