@@ -1,4 +1,5 @@
 #= require angular
+#= require angular-route
 #= require_tree ./angular
 #= require jquery
-#= require ../components/bootstrap/dist/js/bootstrap.min.js
+#= require ../vendor/bootstrap/dist/js/bootstrap.min.js

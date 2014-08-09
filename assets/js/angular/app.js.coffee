@@ -1,17 +1,37 @@
-window.app = angular.module('player', [])
+window.app = angular.module('player', ['ngRoute'])
 
-app.controller 'StationsController', ['$scope', 'Player', 'Genres', ($scope, Player, Genres) ->
-  $scope.genres = Genres
+app.config ['$routeProvider', ($routeProvider) ->
+  $routeProvider
+    .when '/',
+      templateUrl: 'partials/index.html',
+      controller: 'IndexController'
+    .when '/stations/:genreName',
+      templateUrl: 'partials/stations.html',
+      controller: 'StationsController'
+]
 
-  $scope.getStations = (genreName) ->
-    $scope.loadingStations = true
-    Player.getStations genreName, (stations)->
-      $scope.loadingStations = false
-      $scope.stations = stations
+app.controller 'IndexController', ['$scope', 'Player', ($scope, Player) ->
+  $scope.loadingGenres = true
+
+  Player.getGenres (genres) ->
+    $scope.genres = genres
+    $scope.loadingGenres = false
+]
+
+
+app.controller 'StationsController', ['$scope', '$routeParams', 'Player', ($scope, $routeParams, Player) ->
+  $scope.loadingStations = true
+  genreName = $routeParams.genreName
+  $scope.genreName = genreName
+
+  Player.getStations genreName, (stations)->
+    $scope.stations = stations
+    $scope.loadingStations = false
 
   $scope.playStation = (station) ->
     Player.playStation station
 ]
+
 
 app.controller 'PlayerController', ['$scope', 'Player', '$timeout', ($scope, Player, $timeout) ->
   $scope.$on 'stationChanged', ->
@@ -29,11 +49,10 @@ app.controller 'PlayerController', ['$scope', 'Player', '$timeout', ($scope, Pla
 ]
 
 
-
 app.service 'Player', ['$rootScope', '$http', ($rootScope, $http) ->
   @getStations = (genreName, callback) ->
     $http
-      .get "/genre/#{genreName}/stations"
+      .get "/genres/#{genreName}/stations"
       .success (data) ->
         callback(data)
 
@@ -50,6 +69,13 @@ app.service 'Player', ['$rootScope', '$http', ($rootScope, $http) ->
       .get '/player/station/current/track'
       .success (data) ->
         callback(data)
+
+  @getGenres = (callback) ->
+    $http
+      .get '/genres/'
+      .success (data) ->
+        callback(data)
+
 
   return
 ]

@@ -1,7 +1,12 @@
 /*
- *=require ../components/bootstrap/dist/css/bootstrap.min.css
+ *=require ../vendor/bootstrap/dist/css/bootstrap.min.css
  */
 
-body { padding-top: 70px; }
+body { padding-top: 170px; }
 
 .navbar-player-buttons { margin-top: 50px; }
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}

@@ -2,14 +2,14 @@ doctype html
 html(ng-app="player")
   head
     title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
     != js('application')
     != css('application')
   body
-    .container
+    .container-fluid
       nav(role="navigation").navbar.navbar-default.navbar-fixed-top
         .container(ng-controller="PlayerController")
-          a.navbar-brand rPi Shoutcast
-          //- ul.nav.navbar-nav
+          a(href='#/').navbar-brand rPi Shoutcast
           p(ng-show="nowPlaying").navbar-text.pull-right Now playing:
             b &nbsp;{{ nowPlaying.CurrentTrack | limitTo: 55 }}.
             i &nbsp;({{ nowPlaying.Name | limitTo: 30 }}, {{ nowPlaying.Genre }})

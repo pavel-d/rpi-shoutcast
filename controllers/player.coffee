@@ -13,6 +13,10 @@ module.exports.stations = (req, res) ->
   shoutcast.browseByGenre genreName, (err, stations) ->
     res.json(stations)
 
+module.exports.genres = (req, res) ->
+  genres = shoutcast.getGenres()
+  res.json(genres)
+
 module.exports.pause = (req, res) ->
   player.pause()
   res.send 204

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <th>Genres</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="genre in genres">
+          <td>{{ genre.name }}
+            <a class="btn btn-default btn-xs" ng-href="#/stations/{{ genre.name }}">Show stations</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <div ng-show="loadingStations" class="col-md-2 col-xs-6 col-centered"><img src="/images/ajax-loader.gif" alt="loading"/></div>
+    <div ng-hide="loadingStations">
+      <table class="table table-hover">
+        <thead>
+          <th>{{ genreName }} stations</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="station in stations">
+            <td ng-click="playStation(station)">{{ station.Name }}
+              <button class="btn btn-success btn-xs pull-right">Play</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

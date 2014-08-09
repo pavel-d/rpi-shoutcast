@@ -1,27 +1,4 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to RaspCast
-  script.
-    app.value('Genres', !{ JSON.stringify(genres) })
-  .row(ng-controller="StationsController")
-    .col-md-4
-      table.table.table-hover
-        thead
-          th Genres
-        tbody
-          tr(ng-repeat="genre in genres")
-            td(ng-click="getStations(genre)") {{ genre }}
-              button.btn.btn-default.btn-xs Show stations
-    .col-md-4
-      div(ng-show="loadingStations")
-        img(src="/images/ajax-loader.gif", alt="loading")
-      div(ng-hide="loadingStations")
-        table.table.table-hover
-          thead
-            th Stations
-          tbody
-            tr(ng-repeat="station in stations")
-              td(ng-click="playStation(station)") {{ station.Name }}
-                button.btn.btn-success.btn-xs Play
+  div(ng-view)

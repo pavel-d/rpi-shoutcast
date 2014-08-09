@@ -1,11 +1,11 @@
-express = require('express')
-path = require('path')
-favicon = require('static-favicon')
-logger = require('morgan')
-cookieParser = require('cookie-parser')
-bodyParser = require('body-parser')
-connectAssets = require('connect-assets')
-router = require('./router')
+express = require 'express'
+path = require 'path'
+favicon = require 'static-favicon'
+logger = require 'morgan'
+cookieParser = require 'cookie-parser'
+bodyParser = require 'body-parser'
+connectAssets = require 'connect-assets'
+router = require './router'
 
 app = express()
 
@@ -17,9 +17,9 @@ app.use logger('dev')
 app.use bodyParser.json()
 app.use bodyParser.urlencoded()
 app.use cookieParser()
-app.use connectAssets({ paths: ['assets/js', 'assets/css', 'assets/components'] })
+app.use connectAssets({ paths: ['assets/js', 'assets/css', 'assets/vendor'] })
 app.use express.static(path.join(__dirname, 'public'))
-app.use '/assets', express.static(path.join(__dirname, 'assets/components'))
+app.use '/assets', express.static(path.join(__dirname, 'assets/vendor'))
 
 app.use '/', router
 
