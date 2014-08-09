@@ -16,9 +16,16 @@ class Player extends events.EventEmitter
 
   open: (streamURL) ->
     exec "echo 'loadfile #{streamURL}' > mp_pipe"
+    @playing = true
 
   pause: ->
     exec 'echo pause > mp_pipe'
+    @playing = !@playing
+
+  playing: false
+
+  isPlaying: ->
+    @playing
 
 
 

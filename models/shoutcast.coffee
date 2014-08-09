@@ -43,7 +43,7 @@ module.exports.getCurrentTrack = (callback) ->
       .end (err, res) ->
         callback err, res.body.Station || {}
   else
-    callback null, { stopped: true }
+    callback {}
 
 
 

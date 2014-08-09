@@ -21,6 +21,6 @@ module.exports.pause = (req, res) ->
   player.pause()
   res.send 204
 
-module.exports.currentTrack = (req, res) ->
-  shoutcast.getCurrentTrack  (err, currentTrack) ->
-    res.json(currentTrack)
+module.exports.nowPlaying = (req, res) ->
+  shoutcast.getCurrentTrack  (err, currentStation) ->
+    res.json({ station: currentStation, isPlaying: player.isPlaying() })

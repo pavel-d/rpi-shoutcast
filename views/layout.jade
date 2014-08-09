@@ -10,15 +10,13 @@ html(ng-app="player")
       nav(role="navigation").navbar.navbar-default.navbar-fixed-top
         .container(ng-controller="PlayerController")
           a(href='#/').navbar-brand rPi Shoutcast
-          p(ng-show="nowPlaying").navbar-text.pull-right Now playing:
-            b &nbsp;{{ nowPlaying.CurrentTrack | limitTo: 55 }}.
-            i &nbsp;({{ nowPlaying.Name | limitTo: 30 }}, {{ nowPlaying.Genre }})
+          p(ng-show="nowPlaying.station").navbar-text.pull-right Now playing:
+            b &nbsp;{{ nowPlaying.station.CurrentTrack | limitTo: 55 }}.
+            i &nbsp;({{ nowPlaying.station.Name | limitTo: 30 }}, {{ nowPlaying.station.Genre }})
           form.navbar-form.navbar-left
-            form-group
-              button(type="submit", ng-click="pause()").btn.btn-default Play
-                span.glyphicon.glyphicon-play
-            form-group
-              button(type="submit", , ng-click="pause()").btn.btn-default Pause
-                span.glyphicon.glyphicon-pause
+            button(type="submit", ng-click="pause()", ng-hide="nowPlaying.isPlaying").btn.btn-default
+              span.glyphicon.glyphicon-play
+            button(type="submit", , ng-click="pause()", ng-show="nowPlaying.isPlaying").btn.btn-default
+              span.glyphicon.glyphicon-pause
 
       block content

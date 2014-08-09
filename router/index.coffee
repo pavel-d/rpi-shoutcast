@@ -4,7 +4,7 @@ controllers = require '../controllers'
 
 router.get '/', controllers.main.index
 
-router.get '/player/station/current/track', controllers.player.currentTrack
+router.get '/player/nowPlaying', controllers.player.nowPlaying
 router.post '/player/station/:stationID', controllers.player.station
 router.post '/player/pause', controllers.player.pause
 router.post '/player/pause', controllers.player.pause

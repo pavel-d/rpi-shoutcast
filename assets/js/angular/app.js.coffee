@@ -34,15 +34,14 @@ app.controller 'StationsController', ['$scope', '$routeParams', 'Player', ($scop
 
 
 app.controller 'PlayerController', ['$scope', 'Player', '$timeout', ($scope, Player, $timeout) ->
-  $scope.$on 'stationChanged', ->
+  $scope.$on 'nowPlayingChanged', ->
     $scope.nowPlaying = Player.nowPlaying
 
   $scope.pause = ->
     Player.pause()
 
   updateNowPlaying = ->
-    Player.getCurrentTrack (nowPlaying) ->
-      $scope.nowPlaying = nowPlaying unless nowPlaying.stopped
+    Player.updateNowPlaying (data) ->
       $timeout(updateNowPlaying, 2000);
 
   updateNowPlaying()
@@ -50,32 +49,36 @@ app.controller 'PlayerController', ['$scope', 'Player', '$timeout', ($scope, Pla
 
 
 app.service 'Player', ['$rootScope', '$http', ($rootScope, $http) ->
-  @getStations = (genreName, callback) ->
+  nowPlaying: { station: {}, isPlaying: false }
+
+  getStations: (genreName, callback) ->
     $http
       .get "/genres/#{genreName}/stations"
       .success (data) ->
         callback(data)
 
-  @playStation = (station) ->
-    @nowPlaying = station
-    $rootScope.$broadcast 'stationChanged'
+  playStation: (station) ->
     $http.post "/player/station/#{station.ID}"
+    @nowPlaying.station = station
+    @nowPlaying.isPlaying = true
+    $rootScope.$broadcast 'nowPlayingChanged'
 
-  @pause = ->
+  pause: ->
     $http.post '/player/pause'
+    @nowPlaying.isPlaying = !(@nowPlaying.isPlaying)
+    $rootScope.$broadcast 'nowPlayingChanged'
 
-  @getCurrentTrack = (callback) ->
+  updateNowPlaying: (callback) ->
     $http
-      .get '/player/station/current/track'
-      .success (data) ->
+      .get '/player/nowPlaying'
+      .success (data) =>
+        @nowPlaying = data
+        $rootScope.$broadcast 'nowPlayingChanged'
         callback(data)
 
-  @getGenres = (callback) ->
+  getGenres: (callback) ->
     $http
       .get '/genres/'
       .success (data) ->
         callback(data)
-
-
-  return
 ]
