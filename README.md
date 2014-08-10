@@ -8,7 +8,7 @@ Installing
 ```
 git clone https://github.com/pavel-d/rpi-shoutcast.git
 cd rpi-shoutcast
-npm install && cake setup
+npm install && mkfifo mp_pipe
 ```
 
 Running
