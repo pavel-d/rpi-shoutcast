@@ -4,7 +4,7 @@ Player = require('../../models/player')
 
 describe 'Player', ->
   describe 'constructor', ->
-    it 'should spawn mplayer process', (done) ->
+    it.skip 'should spawn mplayer process', (done) ->
       player = new Player
       pid = player.process.pid
 
